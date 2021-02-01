@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"g g",
+		"gcg",
+		" g "
+	],
+	"key": {
+		"c": {
+			"item": "minecraft:chest"
+		},
+		"g": {
+			"item": "minecraft:gold_ingot"
+		}
+	},
+	"result": {
+		"item": "goldenhoppers:golden_hopper"
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"variants": {
+		"facing=down": {
+			"model": "goldenhoppers:block/golden_hopper"
+		},
+		"facing=east": {
+			"model": "goldenhoppers:block/golden_hopper_side",
+			"y": 90
+		},
+		"facing=north": {
+			"model": "goldenhoppers:block/golden_hopper_side"
+		},
+		"facing=south": {
+			"model": "goldenhoppers:block/golden_hopper_side",
+			"y": 180
+		},
+		"facing=west": {
+			"model": "goldenhoppers:block/golden_hopper_side",
+			"y": 270
+		}
+	}
+}
