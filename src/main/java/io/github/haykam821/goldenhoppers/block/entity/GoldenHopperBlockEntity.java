@@ -13,12 +13,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.ItemScatterer;
 
 public class GoldenHopperBlockEntity extends HopperBlockEntity {
 	private Inventory filterInventory = new SimpleInventory(1);
 
 	private ItemStack getFilter() {
 		return this.filterInventory.getStack(0);
+	}
+
+	public void scatterFilter() {
+		ItemScatterer.spawn(this.getWorld(), this.getPos(), this.filterInventory);
 	}
 
 	public boolean isAcceptedByFilter(ItemStack stack) {
