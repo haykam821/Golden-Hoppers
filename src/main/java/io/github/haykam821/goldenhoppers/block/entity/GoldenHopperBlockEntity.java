@@ -27,8 +27,13 @@ public class GoldenHopperBlockEntity extends HopperBlockEntity {
 	}
 
 	public boolean isAcceptedByFilter(ItemStack stack) {
-		if (stack == null || stack.isEmpty()) return false;
-		return this.getFilter().getItem() == stack.getItem();
+		if (stack == null || stack.isEmpty()) return true;
+
+		// No filter allows any item
+		ItemStack filter = this.getFilter();
+		if (filter == null || filter.isEmpty()) return true;
+
+		return filter.getItem() == stack.getItem();
 	}
 
 	@Override
