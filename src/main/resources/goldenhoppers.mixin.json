@@ -3,7 +3,8 @@
 	"package": "io.github.haykam821.goldenhoppers.mixin",
 	"compatibilityLevel": "JAVA_8",
 	"mixins": [
-		"HopperBlockEntityMixin"
+		"HopperBlockEntityMixin",
+		"RedstoneWireBlockMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
