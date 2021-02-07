@@ -1,5 +1,7 @@
 package io.github.haykam821.goldenhoppers.block.entity;
 
+import java.util.stream.IntStream;
+
 import io.github.haykam821.goldenhoppers.Main;
 import io.github.haykam821.goldenhoppers.screen.GoldenHopperScreenHandler;
 import net.minecraft.block.BlockState;
@@ -7,6 +9,7 @@ import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -14,8 +17,11 @@ import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.math.Direction;
 
-public class GoldenHopperBlockEntity extends HopperBlockEntity {
+public class GoldenHopperBlockEntity extends HopperBlockEntity implements SidedInventory {
+	private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 5).toArray();
+
 	private Inventory filterInventory = new SimpleInventory(1);
 
 	private ItemStack getFilter() {
@@ -34,6 +40,21 @@ public class GoldenHopperBlockEntity extends HopperBlockEntity {
 		if (filter == null || filter.isEmpty()) return true;
 
 		return filter.getItem() == stack.getItem();
+	}
+
+	@Override
+	public int[] getAvailableSlots(Direction side) {
+		return AVAILABLE_SLOTS;
+	}
+
+	@Override
+	public boolean canInsert(int slot, ItemStack stack, Direction direction) {
+		return this.isAcceptedByFilter(stack);
+	}
+
+	@Override
+	public boolean canExtract(int slot, ItemStack stack, Direction direction) {
+		return true;
 	}
 
 	@Override
