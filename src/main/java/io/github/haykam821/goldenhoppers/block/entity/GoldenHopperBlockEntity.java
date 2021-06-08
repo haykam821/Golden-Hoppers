@@ -12,17 +12,22 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ItemScatterer;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
 public class GoldenHopperBlockEntity extends HopperBlockEntity implements SidedInventory {
 	private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 5).toArray();
 
 	private Inventory filterInventory = new SimpleInventory(1);
+
+	public GoldenHopperBlockEntity(BlockPos pos, BlockState state) {
+		super(pos, state);
+	}
 
 	private ItemStack getFilter() {
 		return this.filterInventory.getStack(0);
@@ -63,15 +68,15 @@ public class GoldenHopperBlockEntity extends HopperBlockEntity implements SidedI
 	}
 
 	@Override
-	public void fromTag(BlockState state, CompoundTag tag) {
-		super.fromTag(state, tag);
-		this.filterInventory.setStack(0, ItemStack.fromTag(tag.getCompound("Filter")));
+	public void readNbt(NbtCompound tag) {
+		super.readNbt(tag);
+		this.filterInventory.setStack(0, ItemStack.fromNbt(tag.getCompound("Filter")));
 	}
 
 	@Override
-	public CompoundTag toTag(CompoundTag tag) {
-		tag.put("Filter", this.filterInventory.getStack(0).toTag(new CompoundTag()));
-		return super.toTag(tag);
+	public NbtCompound writeNbt(NbtCompound tag) {
+		tag.put("Filter", this.filterInventory.getStack(0).writeNbt(new NbtCompound()));
+		return super.writeNbt(tag);
 	}
 
 	@Override

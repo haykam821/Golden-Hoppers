@@ -7,20 +7,23 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import io.github.haykam821.goldenhoppers.block.entity.GoldenHopperBlockEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.Hopper;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.world.World;
 
 @Mixin(HopperBlockEntity.class)
 public class HopperBlockEntityMixin {
 	@Redirect(method = "insert", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z", ordinal = 0))
-	private boolean filterOutput(ItemStack stack) {
+	private static boolean filterOutput(ItemStack stack, World world, BlockPos pos, BlockState state, Inventory inventory) {
 		if (stack.isEmpty()) return true;
-		if ((Object) this instanceof GoldenHopperBlockEntity) {
-			GoldenHopperBlockEntity goldenHopper = (GoldenHopperBlockEntity) (Object) this;
+		if ((Object) inventory instanceof GoldenHopperBlockEntity) {
+			GoldenHopperBlockEntity goldenHopper = (GoldenHopperBlockEntity) (Object) inventory;
 			if (!goldenHopper.isAcceptedByFilter(stack)) return true;
 		}
 
