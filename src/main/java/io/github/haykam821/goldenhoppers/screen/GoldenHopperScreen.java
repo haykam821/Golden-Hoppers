@@ -7,6 +7,7 @@ import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
@@ -37,5 +38,15 @@ public class GoldenHopperScreen extends HandledScreen<GoldenHopperScreenHandler>
 		int y = (this.height - this.backgroundHeight) / 2;
 
 		this.drawTexture(matrices, x, y, 0, 0, this.backgroundWidth, this.backgroundHeight);
+
+		// Render the filter slot placeholder
+		Slot filterSlot = this.handler.getFilterSlot();
+		if (!filterSlot.hasStack()) {
+			this.drawFilterIcon(matrices, filterSlot);
+		}
+	}
+
+	private void drawFilterIcon(MatrixStack matrices, Slot slot) {
+		this.drawTexture(matrices, this.x + slot.x, this.y + slot.y, this.backgroundWidth, 0, 16, 16);
 	}
 }

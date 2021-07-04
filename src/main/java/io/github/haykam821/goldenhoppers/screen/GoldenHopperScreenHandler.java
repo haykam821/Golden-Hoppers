@@ -12,6 +12,7 @@ import net.minecraft.screen.slot.Slot;
 public class GoldenHopperScreenHandler extends ScreenHandler {
 	private final Inventory inventory;
 	private final Inventory filterInventory;
+	private final Slot filterSlot;
 
 	public GoldenHopperScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inventory, Inventory filterInventory) {
 		super(Main.GOLDEN_HOPPER_SCREEN_HANDLER_TYPE, syncId);
@@ -27,7 +28,7 @@ public class GoldenHopperScreenHandler extends ScreenHandler {
 		// Filter
 		this.filterInventory = filterInventory;
 		ScreenHandler.checkSize(this.filterInventory, 1);
-		this.addSlot(new Slot(this.filterInventory, 0, 26, 20) {
+		this.filterSlot = this.addSlot(new Slot(this.filterInventory, 0, 26, 20) {
 			@Override
 			public int getMaxItemCount() {
 				return 1;
@@ -50,6 +51,10 @@ public class GoldenHopperScreenHandler extends ScreenHandler {
 
 	public GoldenHopperScreenHandler(int syncId, PlayerInventory playerInventory) {
 		this(syncId, playerInventory, new SimpleInventory(5), new SimpleInventory(1));
+	}
+
+	protected Slot getFilterSlot() {
+		return this.filterSlot;
 	}
 
 	@Override
