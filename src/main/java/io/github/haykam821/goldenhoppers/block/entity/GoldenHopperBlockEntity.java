@@ -11,8 +11,11 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.PotionItem;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -44,7 +47,19 @@ public class GoldenHopperBlockEntity extends HopperBlockEntity implements SidedI
 		ItemStack filter = this.getFilter();
 		if (filter == null || filter.isEmpty()) return true;
 
-		return filter.getItem() == stack.getItem();
+		Item filterItem = filter.getItem();
+		Item item = stack.getItem();
+
+		if (filterItem == item) {
+			// Potions must match
+			if (filterItem instanceof PotionItem && item instanceof PotionItem) {
+				return PotionUtil.getPotion(filter) == PotionUtil.getPotion(stack);
+			}
+
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
