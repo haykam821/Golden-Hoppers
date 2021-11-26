@@ -89,9 +89,9 @@ public class GoldenHopperBlockEntity extends HopperBlockEntity implements SidedI
 	}
 
 	@Override
-	public NbtCompound writeNbt(NbtCompound tag) {
+	public void writeNbt(NbtCompound tag) {
 		tag.put("Filter", this.filterInventory.getStack(0).writeNbt(new NbtCompound()));
-		return super.writeNbt(tag);
+		super.writeNbt(tag);
 	}
 
 	@Override
