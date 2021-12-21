@@ -1,3 +1,6 @@
 {
-	"parent": "goldenhoppers:block/golden_hopper"
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "goldenhoppers:item/golden_hopper"
+	}
 }
