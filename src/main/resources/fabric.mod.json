@@ -23,7 +23,7 @@
 		"goldenhoppers.mixin.json"
 	],
 	"license": "MIT",
-	"icon": "assets/goldenhoppers/icon.png",
+	"icon": "assets/goldenhoppers/textures/item/golden_hopper.png",
 	"depends": {
 		"fabricloader": ">=0.4.0",
 		"fabric": "*"
