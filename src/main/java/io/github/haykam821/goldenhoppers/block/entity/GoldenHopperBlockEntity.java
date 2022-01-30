@@ -11,11 +11,8 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.inventory.SimpleInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.PotionItem;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.potion.PotionUtil;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -23,7 +20,7 @@ import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 
-public class GoldenHopperBlockEntity extends HopperBlockEntity implements SidedInventory {
+public class GoldenHopperBlockEntity extends HopperBlockEntity implements GoldenHopper, SidedInventory {
 	private static final int[] AVAILABLE_SLOTS = IntStream.range(0, 5).toArray();
 
 	private Inventory filterInventory = new SimpleInventory(1);
@@ -32,34 +29,13 @@ public class GoldenHopperBlockEntity extends HopperBlockEntity implements SidedI
 		super(pos, state);
 	}
 
-	private ItemStack getFilter() {
+	@Override
+	public ItemStack getFilter() {
 		return this.filterInventory.getStack(0);
 	}
 
 	public void scatterFilter() {
 		ItemScatterer.spawn(this.getWorld(), this.getPos(), this.filterInventory);
-	}
-
-	public boolean isAcceptedByFilter(ItemStack stack) {
-		if (stack == null || stack.isEmpty()) return true;
-
-		// No filter allows any item
-		ItemStack filter = this.getFilter();
-		if (filter == null || filter.isEmpty()) return true;
-
-		Item filterItem = filter.getItem();
-		Item item = stack.getItem();
-
-		if (filterItem == item) {
-			// Potions must match
-			if (filterItem instanceof PotionItem && item instanceof PotionItem) {
-				return PotionUtil.getPotion(filter) == PotionUtil.getPotion(stack);
-			}
-
-			return true;
-		}
-
-		return false;
 	}
 
 	@Override
