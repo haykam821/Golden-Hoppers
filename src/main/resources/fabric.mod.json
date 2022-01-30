@@ -17,6 +17,9 @@
 		],
 		"client": [
 			"io.github.haykam821.goldenhoppers.ClientMain"
+		],
+		"fabric-datagen": [
+			"io.github.haykam821.goldenhoppers.data.GoldenHoppersDatagen"
 		]
 	},
 	"mixins": [
