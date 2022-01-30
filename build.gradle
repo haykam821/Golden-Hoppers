@@ -1,5 +1,5 @@
 plugins {
-	id "fabric-loom" version "0.10-SNAPSHOT"
+	id "fabric-loom" version "0.11.27"
 	id "maven-publish"
 }
 
@@ -19,6 +19,8 @@ repositories {
 }
 
 loom {
+	runtimeOnlyLog4j = true
+
 	runs {
 		datagen {
 			server()
