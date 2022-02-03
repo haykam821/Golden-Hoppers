@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 @Mixin(targets = "net.minecraft.item.MinecartItem$1")
 public class MinecartDispenserBehaviorMixin {
-	@Redirect(method = "dispenseSilently", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/vehicle/AbstractMinecartEntity;create(Lnet/minecraft/world/World;DDDLnet/minecraft/entity/vehicle/AbstractMinecartEntity$Type;)Lnet/minecraft/entity/vehicle/AbstractMinecartEntity;"))
+	@Redirect(method = "dispenseSilently(Lnet/minecraft/util/math/BlockPointer;Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/vehicle/AbstractMinecartEntity;create(Lnet/minecraft/world/World;DDDLnet/minecraft/entity/vehicle/AbstractMinecartEntity$Type;)Lnet/minecraft/entity/vehicle/AbstractMinecartEntity;"))
 	private AbstractMinecartEntity createDispensedCustomMinecartEntity(World world, double x, double y, double z, MinecartEntity.Type type, BlockPointer pointer, ItemStack stack) {
 		Item item = stack.getItem();
 		if ((Object) item instanceof CustomMinecartItem) {
