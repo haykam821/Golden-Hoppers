@@ -7,5 +7,6 @@ public class GoldenHoppersDatagen implements DataGeneratorEntrypoint {
 	@Override
 	public void onInitializeDataGenerator(FabricDataGenerator dataGenerator) {
 		dataGenerator.addProvider(GoldenHoppersModelProvider::new);
+		dataGenerator.addProvider(GoldenHoppersBlockTagProvider::new);
 	}
 }
