@@ -4,24 +4,24 @@ import java.util.Optional;
 
 import io.github.haykam821.goldenhoppers.Main;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricBlockStateDefinitionProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HopperBlock;
+import net.minecraft.data.client.BlockStateModelGenerator;
+import net.minecraft.data.client.BlockStateVariant;
+import net.minecraft.data.client.BlockStateVariantMap;
 import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.model.BlockStateModelGenerator;
-import net.minecraft.data.client.model.BlockStateVariant;
-import net.minecraft.data.client.model.BlockStateVariantMap;
-import net.minecraft.data.client.model.Model;
-import net.minecraft.data.client.model.Models;
-import net.minecraft.data.client.model.Texture;
-import net.minecraft.data.client.model.TextureKey;
-import net.minecraft.data.client.model.VariantSettings;
-import net.minecraft.data.client.model.VariantsBlockStateSupplier;
+import net.minecraft.data.client.Model;
+import net.minecraft.data.client.Models;
+import net.minecraft.data.client.TextureKey;
+import net.minecraft.data.client.TextureMap;
+import net.minecraft.data.client.VariantSettings;
+import net.minecraft.data.client.VariantsBlockStateSupplier;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Direction;
 
-public class GoldenHoppersModelProvider extends FabricBlockStateDefinitionProvider {
+public class GoldenHoppersModelProvider extends FabricModelProvider {
 	public static final Model HOPPER_MODEL = GoldenHoppersModelProvider.createModel("hopper", TextureKey.PARTICLE, TextureKey.TOP, TextureKey.SIDE, TextureKey.INSIDE);
 	public static final Model HOPPER_SIDE_MODEL = GoldenHoppersModelProvider.createModel("hopper_side", "_side", TextureKey.PARTICLE, TextureKey.TOP, TextureKey.SIDE, TextureKey.INSIDE);
 
@@ -41,7 +41,7 @@ public class GoldenHoppersModelProvider extends FabricBlockStateDefinitionProvid
 	}
 
 	public static void registerHopper(Block hopper, Block base, BlockStateModelGenerator modelGenerator) {
-		Texture textures = GoldenHoppersModelProvider.createHopperTextures(base);
+		TextureMap textures = GoldenHoppersModelProvider.createHopperTextures(base);
 
 		Identifier modelId = HOPPER_MODEL.upload(hopper, textures, modelGenerator.modelCollector);
 		Identifier sideModelId = HOPPER_SIDE_MODEL.upload(hopper, textures, modelGenerator.modelCollector);
@@ -56,10 +56,10 @@ public class GoldenHoppersModelProvider extends FabricBlockStateDefinitionProvid
 		modelGenerator.blockStateCollector.accept(VariantsBlockStateSupplier.create(hopper).coordinate(variants));
 	}
 
-	public static Texture createHopperTextures(Block block) {
-		Identifier id = Texture.getId(block);
+	public static TextureMap createHopperTextures(Block block) {
+		Identifier id = TextureMap.getId(block);
 
-		return new Texture()
+		return new TextureMap()
 			.put(TextureKey.PARTICLE, id)
 			.put(TextureKey.TOP, id)
 			.put(TextureKey.SIDE, id)
