@@ -1,17 +1,13 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"h",
-		"m"
-	],
-	"key": {
-		"h": {
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
 			"item": "goldenhoppers:golden_hopper"
 		},
-		"m": {
+		{
 			"item": "minecraft:minecart"
 		}
-	},
+	],
 	"result": {
 		"item": "goldenhoppers:golden_hopper_minecart"
 	}

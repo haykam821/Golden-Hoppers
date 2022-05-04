@@ -15,7 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -55,7 +54,7 @@ public class GoldenHopperBlockEntity extends HopperBlockEntity implements Golden
 
 	@Override
 	protected Text getContainerName() {
-		return new TranslatableText("container.golden_hopper");
+		return Text.translatable("container.golden_hopper");
 	}
 
 	@Override

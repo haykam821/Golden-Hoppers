@@ -4,12 +4,14 @@ import io.github.haykam821.goldenhoppers.Main;
 import io.github.haykam821.goldenhoppers.block.entity.GoldenHopper;
 import io.github.haykam821.goldenhoppers.screen.GoldenHopperScreenHandler;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.vehicle.HopperMinecartEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.ItemScatterer;
@@ -34,12 +36,17 @@ public class GoldenHopperMinecartEntity extends HopperMinecartEntity implements 
 	}
 
 	@Override
-	public void dropItems(DamageSource damageSource) {
-		super.dropItems(damageSource);
+	public void onBroken(DamageSource source, World world, Entity vehicle) {
+		super.onBroken(source, world, vehicle);
 
 		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
 			ItemScatterer.spawn(this.getWorld(), this, this.filterInventory);
 		}
+	}
+
+	@Override
+	protected Item getItem() {
+		return Main.GOLDEN_HOPPER_MINECART_ITEM;
 	}
 
 	@Override
