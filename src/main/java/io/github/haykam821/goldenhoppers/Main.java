@@ -9,7 +9,6 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
-import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.MapColor;
@@ -32,7 +31,7 @@ public class Main implements ModInitializer {
 	public static final Item GOLDEN_HOPPER_ITEM = new BlockItem(GOLDEN_HOPPER, new Item.Settings().group(ItemGroup.REDSTONE));
 
 	public static final BlockEntityType<GoldenHopperBlockEntity> GOLDEN_HOPPER_BLOCK_ENTITY_TYPE = FabricBlockEntityTypeBuilder.create(GoldenHopperBlockEntity::new, GOLDEN_HOPPER).build(null);
-	public static final ScreenHandlerType<GoldenHopperScreenHandler> GOLDEN_HOPPER_SCREEN_HANDLER_TYPE = ScreenHandlerRegistry.registerSimple(GOLDEN_HOPPER_ID, GoldenHopperScreenHandler::new);
+	public static final ScreenHandlerType<GoldenHopperScreenHandler> GOLDEN_HOPPER_SCREEN_HANDLER_TYPE = new ScreenHandlerType<>(GoldenHopperScreenHandler::new);
 
 	protected static final Identifier GOLDEN_HOPPER_MINECART_ID = new Identifier(MOD_ID, "golden_hopper_minecart");
 	public static final EntityType<GoldenHopperMinecartEntity> GOLDEN_HOPPER_MINECART_ENTITY_TYPE = FabricEntityTypeBuilder.<GoldenHopperMinecartEntity>create(SpawnGroup.MISC, GoldenHopperMinecartEntity::new)
@@ -47,6 +46,7 @@ public class Main implements ModInitializer {
 		Registry.register(Registry.ITEM, GOLDEN_HOPPER_ID, GOLDEN_HOPPER_ITEM);
 
 		Registry.register(Registry.BLOCK_ENTITY_TYPE, GOLDEN_HOPPER_ID, GOLDEN_HOPPER_BLOCK_ENTITY_TYPE);
+		Registry.register(Registry.SCREEN_HANDLER, GOLDEN_HOPPER_ID, GOLDEN_HOPPER_SCREEN_HANDLER_TYPE);
 
 		Registry.register(Registry.ENTITY_TYPE, GOLDEN_HOPPER_MINECART_ID, GOLDEN_HOPPER_MINECART_ENTITY_TYPE);
 		Registry.register(Registry.ITEM, GOLDEN_HOPPER_MINECART_ID, GOLDEN_HOPPER_MINECART_ITEM);
