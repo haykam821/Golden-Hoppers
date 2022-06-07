@@ -43,6 +43,10 @@ public class GoldenHopperMinecartEntity extends HopperMinecartEntity implements 
 	}
 
 	@Override
+	public ItemStack getPickBlockStack() {
+		return new ItemStack(Main.GOLDEN_HOPPER_MINECART_ITEM);
+	}
+
 	public ScreenHandler getScreenHandler(int syncId, PlayerInventory playerInventory) {
 		return new GoldenHopperScreenHandler(syncId, playerInventory, this, this.filterInventory);
 	}
