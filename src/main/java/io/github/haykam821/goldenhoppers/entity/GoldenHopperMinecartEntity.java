@@ -11,6 +11,7 @@ import net.minecraft.entity.vehicle.HopperMinecartEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.world.GameRules;
@@ -40,6 +41,18 @@ public class GoldenHopperMinecartEntity extends HopperMinecartEntity implements 
 		if (this.world.getGameRules().getBoolean(GameRules.DO_ENTITY_DROPS)) {
 			ItemScatterer.spawn(this.getWorld(), this, this.filterInventory);
 		}
+	}
+
+	@Override
+	protected void readCustomDataFromNbt(NbtCompound nbt) {
+		super.readCustomDataFromNbt(nbt);
+		this.filterInventory.setStack(0, ItemStack.fromNbt(nbt.getCompound(FILTER_KEY)));
+	}
+
+	@Override
+	protected void writeCustomDataToNbt(NbtCompound nbt) {
+		nbt.put(FILTER_KEY, this.filterInventory.getStack(0).writeNbt(new NbtCompound()));
+		super.writeCustomDataToNbt(nbt);
 	}
 
 	@Override

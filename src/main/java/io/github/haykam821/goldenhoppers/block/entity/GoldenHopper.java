@@ -6,6 +6,8 @@ import net.minecraft.item.PotionItem;
 import net.minecraft.potion.PotionUtil;
 
 public interface GoldenHopper {
+	public static final String FILTER_KEY = "Filter";
+
 	public ItemStack getFilter();
 
 	public default boolean isAcceptedByFilter(ItemStack stack) {

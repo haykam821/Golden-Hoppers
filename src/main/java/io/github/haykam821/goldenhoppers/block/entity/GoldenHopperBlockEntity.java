@@ -59,15 +59,15 @@ public class GoldenHopperBlockEntity extends HopperBlockEntity implements Golden
 	}
 
 	@Override
-	public void readNbt(NbtCompound tag) {
-		super.readNbt(tag);
-		this.filterInventory.setStack(0, ItemStack.fromNbt(tag.getCompound("Filter")));
+	public void readNbt(NbtCompound nbt) {
+		super.readNbt(nbt);
+		this.filterInventory.setStack(0, ItemStack.fromNbt(nbt.getCompound(FILTER_KEY)));
 	}
 
 	@Override
-	public void writeNbt(NbtCompound tag) {
-		tag.put("Filter", this.filterInventory.getStack(0).writeNbt(new NbtCompound()));
-		super.writeNbt(tag);
+	public void writeNbt(NbtCompound nbt) {
+		nbt.put(FILTER_KEY, this.filterInventory.getStack(0).writeNbt(new NbtCompound()));
+		super.writeNbt(nbt);
 	}
 
 	@Override
